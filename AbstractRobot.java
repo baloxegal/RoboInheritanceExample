@@ -1,6 +1,7 @@
 package robo;
 
 public abstract class AbstractRobot {
+	
 	public abstract void setName(String name);
 	public abstract String getName();
 	
