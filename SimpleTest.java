@@ -2,7 +2,6 @@ package tests;
 
 import robo.AbstractRobot;
 
-
 public class SimpleTest {
 	public static int runCase (AbstractRobot robot) {
 		
