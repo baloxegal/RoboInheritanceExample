@@ -1,95 +1,71 @@
 package robo;
 
-import java.util.Scanner;
-
 public class BetaRobot extends AlphaRobot {
-	private byte charge;
-	private int oldX;
-	private int oldY;
 	
+	private byte charge;
+	private int steps;
+		
 	public BetaRobot(String name, String model) {
 		super(name, model);
 		charge = 0;
-		oldX = 0;
-		oldY = 0;
+		steps = 0;
 	}
 	
 	public void setCharge(int charge) {
-		if(charge < 0 || charge > 100) {
-			System.err.println("ERROR!!! Insert the charge value from the range 0 ... 100!");
-			Scanner in = new Scanner(System.in);
-			this.charge = in.nextByte();
-			return;
+		if(charge >= 0 && charge <= 100) {
+			this.charge = (byte)charge;
+			steps = 0;
 		}
-		this.charge = (byte)charge;
 	}
 	public byte getCharge() {
 		return charge;
 	}
-	public void setX(int x) {
-		super.setX(x);
-		oldX = getX();
+	public void setSteps(int steps) {
+		if(steps >= 0) {
+			this.steps = steps;
+		}
 	}
-	private int getOldX() {
-		return oldX;
-	}
-	public void setY(int y) {
-		super.setY(y);
-		oldY = getY();
-	}
-	private int getOldY() {
-		return oldY;
+	public int getSteps() {
+		return steps;
 	}
 	public boolean moveRight() {
-		if(charge <= 5) {
-			return false;
+		if(charge > 5 && super.moveRight()) {
+			steps++;
+			if(steps % 2 == 0) {
+				charge--;
+			}
+			return true;
 		}
-		else if(!super.moveRight()) {
-			return false;
-		}
-		else if (getX() == oldX || getX() - oldX == 2) {
-			charge--;
-			oldX = getX();
-		}
-		return true;
+		return false;
 	}
 	public boolean moveLeft() {
-		if(charge <= 5) {
-			return false;
+		if(charge > 5 && super.moveLeft()) {
+			steps++;
+			if(steps % 2 == 0) {
+				charge--;
+			}
+			return true;
 		}
-		else if(!super.moveLeft()) {
-			return false;
-		}
-		else if (getX() == oldX || oldX - getX() == 2) {
-			charge--;
-			oldX = getX();
-		}
-		return true;
+		return false;
 	}
 	public boolean moveDown() {
-		if(charge <= 5) {
-			return false;
+		if(charge > 5 && super.moveDown()) {
+			steps++;
+			if(steps % 2 == 0) {
+				charge--;
+			}
+			return true;
 		}
-		else if(!super.moveDown()) {
-			return false;
-		}
-		else if (getY() == oldY || getY() - oldY == 2) {
-			charge--;
-			oldY = getY();
-		}
-		return true;
+		return false;
 	}
 	public boolean moveUp() {
-		if(charge <= 5) {
-			return false;
+		if(charge > 5 && super.moveUp()) {
+			steps++;
+			if(steps % 2 == 0) {
+				charge--;
+			}
+			return true;
 		}
-		else if(!super.moveUp()) {
-			return false;
-		}
-		else if (getY() == oldY || oldY - getY() == 2) {
-			charge--;
-			oldY = getY();
-		}
-		return true;
+		return false;
 	}
 }
