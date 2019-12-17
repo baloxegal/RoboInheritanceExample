@@ -19,5 +19,3 @@ public abstract class AbstractRobot {
 	public abstract boolean moveDown();
 	public abstract boolean moveUp();
 }
-
-
